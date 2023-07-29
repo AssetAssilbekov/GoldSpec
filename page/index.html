@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="global.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo&family=Foldit&family=Gruppo&family=Quicksand&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <div class="column">
+      <div class="logobox">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/TSMC-Logo.svg" alt="" width="100px" height="80px">
+        <div class="">
+          <h3>Taiwan Semiconductor Manufacturing</h3>
+          <h4>Sector: Tech/Semiconductor</h4>
+          <h4>TSM</h4>
+        </div>
+      </div>
+      <div class="section2">
+        <h1>Qualitative Score</h1>
+        <div class="box3">
+          <canvas width="200px" height="200px" id="bars"></canvas>
+          <div style="display:flex;flex-direction:column;align-items:center;">
+          <ol>
+            <li>Financial Health: <span style="font-weight:normal;">8.75</span></li>
+            <li>Growth Potential: <span style="font-weight:normal;">8.5</span></li>
+            <li>Risk: <span style="font-weight:normal;" id="switchlabel">7.33</span></li>
+            <li>Intrinsic Value: <span style="font-weight:normal;">7.33</span></li>
+            <li>Profitability: <span style="font-weight:normal;">9.67</span></li>
+          </ol>
+          <div><button id="worst" style="border-radius: 5px 0px 0px 5px;">Worst Case</button><button id="best" style="border-radius: 0px 5px 5px 0px" class="active">Best Case</button></div>
+        </div>
+          <!-- <div class="summary">
+            <p style="font-weight: bold;width:300px;">Quantitative Evaluation Summary</p>
+            <p id="summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="section3">
+        <h1>Financial Health Metric</h1>
+        <div class="box2" style="justify-content:center;" id="net">
+          <canvas id="networkingcapital"></canvas>
+        </div>
+      </div>
+
+      <div class="section2">
+        <h1>Growth Potential Metric</h1>
+        <div class="box2" style="justify-content:center;">
+          <canvas id="growthpotential"></canvas>
+        </div>
+      </div>
+
+      <div class="section3">
+        <h1>Risk Metric</h1>
+        <div class="box2" style="justify-content:center;">
+          <canvas id="risk"></canvas>
+        </div>
+      </div>
+
+      <div class="section2">
+        <h1>Intrinsic Value Metric</h1>
+        <div class="box2" style="justify-content:center;">
+          <canvas id="intrinsic"></canvas>
+        </div>
+      </div>
+
+      <div class="section3">
+        <h1>Profitability Metric</h1>
+        <div class="box2" style="justify-content:center;">
+          <canvas id="profitability"></canvas>
+        </div>
+      </div>
+
+    </div>
+    <nav>
+      <div class="logo">GoldSpec</div>
+      <div class="searchbox">
+        <input type="text" placeholder="Search for company valuations">
+        <ul id="autocomplete">
+        </ul>
+      </div>
+      <ul id="navigator">
+        <li><a href="../index.html">Home</a></li>
+        <!-- <li>Investment Review</li>
+        <li>About</li>
+        <li>Contact</li> -->
+      </ul>
+    </nav>
+    <script src="script.js"></script>
+  </body>
+</html>
