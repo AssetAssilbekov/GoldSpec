@@ -5,13 +5,39 @@ Sheet 4?
 /*
 {
   "com":"asdf",
+  "img":"https://upload.wikimedia.org/wikipedia/commons/2/29/TSMC-Logo.svg",
+  "sector":"asdfghj",
   "tic":"asd",
-  "fin":"1",
-  "gro":"1",
-  "ris":"1",
-  "int":"1",
-  "pro":"1",
-  "qua":"lorem"
+  "id":"123abc"
+
+  "fh":val,
+  "gp":val,
+  "risk":[worst,best],
+  "iv":val,
+  "profitability":val,
+
+  "nwcm":[min,val,max],
+  "ufcffcf":[min,val,max],
+  "dtebitdar":[min,val,max],
+  "dter":[min,val,max],
+
+  "gfm":[min,val,max],
+  "lyarg":[min,val,max],
+  "epsit":[min,val,max],
+  "rt":[min,val,max],
+  "ee":[min,val,max],
+
+  "sd":[min,val,max],
+  "beta":[min,val,max],
+  "sr":[min,val,max],
+
+  "dcf":val,
+  "per":[min,val,max],
+  "psr":[min,val,max],
+
+  "om":[min,val,max],
+  "roa":[min,val,max],
+  "roce":[min,val,max]
 }
 */
 
@@ -19,9 +45,42 @@ const myURL = new URL(window.location.toLocaleString()).searchParams;
 const entryID = myURL.get('id');
 console.log(entryID);
 
+
+let file = '';
+
+function reqListener() {
+  file = JSON.parse(this.responseText);
+  console.log(file);
+  document.querySelector('#loaded').style.display = "block";
+  load();
+  render();
+  render2();
+  document.querySelector('#loaded').style.opacity = 1;
+  document.querySelector('#loading').style.opacity = 0;
+}
+
+const req = new XMLHttpRequest();
+req.addEventListener("load", reqListener);
+req.open("GET", `https://raw.githubusercontent.com/AssetAssilbekov/GoldSpec/main/page/companies/${entryID}.json`);
+req.send();
+
+
 const canvas = document.querySelector('#bars');
 const ctx = canvas.getContext('2d');
-let worstCase = true;
+let worstCase = false;
+
+function load() {
+  document.getElementById('6').innerText = file.com;
+  document.getElementById('7').innerText = 'Sector:' + ' ' + file.sector;
+  document.getElementById('8').innerText = file.tic;
+  document.getElementById('9').src = file.img;
+
+  document.getElementById('1').innerText = file.fh;
+  document.getElementById('2').innerText = file.gp;
+  document.getElementById('switchlabel').innerText = file.risk[1];
+  document.getElementById('4').innerText = file.iv;
+  document.getElementById('5').innerText = file.profitability;
+}
 
 function rect(x,y,width,height,color,text) {
   ctx.fillStyle = color;
@@ -54,34 +113,24 @@ let t = 0;
 function render() {
   requestAnimationFrame(render);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  bar(1,'#e3c56b',8.75);
-  bar(2,'#e3c56b',8.4);
-  bar(3,'#e3c56b',7.33);
-  bar(4,'#e3c56b',7.33);
-  bar(5,'#e3c56b',9.67);
+  bar(1,'#e3c56b',file.fh);
+  bar(2,'#e3c56b',file.gp);
+  bar(3,'#e3c56b',(worstCase)?file.risk[0]:file.risk[1]);
+  bar(4,'#e3c56b',file.iv);
+  bar(5,'#e3c56b',file.profitability);
   line(0,180,200,180);
   if (t<100) t++;
+  console.log('go');
 }
-
-render();
 
 const search = document.querySelector('input');
 const autocomplete = document.querySelector('#autocomplete');
-class Company {
-  constructor(name,logo,address) {
-    this.name = name;
-    this.logo = logo;
-    this.address = address;
-  }
-}
-const companies = [new Company('TSM','','')];
-
 
 search.addEventListener('input', ()=> {
   autocomplete.innerHTML = '';
   let num = 0;
   let val = search.value;
-  companies.forEach((item, i) => {
+  database.forEach((item, i) => {
     if(item.name.toLowerCase().includes(val.toLowerCase())&&num<5&&val!='') {
       autocomplete.innerHTML += `<li><a href="/page/index.html?id=${item.address}" style="color:black;text-decoration:none;">${item.name}</a></li>`;
       num++;
@@ -93,13 +142,13 @@ document.querySelector('#worst').addEventListener('click', () => {
   worstCase = true;
   document.querySelector('#worst').classList.add('active');
   document.querySelector('#best').classList.remove('active');
-  document.querySelector('#switchlabel').innerText = 7.66;
+  document.querySelector('#switchlabel').innerText = file.risk[0];
 });
 document.querySelector('#best').addEventListener('click', () => {
   worstCase = false;
   document.querySelector('#best').classList.add('active');
   document.querySelector('#worst').classList.remove('active');
-  document.querySelector('#switchlabel').innerText = 7.33;
+  document.querySelector('#switchlabel').innerText = file.risk[1];
 });
 
 const networkingcapital = document.querySelector('#networkingcapital');
@@ -156,50 +205,48 @@ function renderScale(canvasContext,min,max,number,start,width,y) {
 
 function render2() {
   ctx2.clearRect(0,0,networkingcapital.width,networkingcapital.height);
-  renderScale(ctx2,53,65,56,networkingcapital.width/3,networkingcapital.width*.6,20);
+  renderScale(ctx2,file.nwcm[0],file.nwcm[2],file.nwcm[1],networkingcapital.width/3,networkingcapital.width*.6,20);
   drawText(ctx2,networkingcapital.width/3-20,40,'Net Working Capital Margin (%)');
-  renderScale(ctx2,-81,47,5,networkingcapital.width/3,networkingcapital.width*.6,80);
+  renderScale(ctx2,file.ufcffcf[0],file.ufcffcf[2],file.ufcffcf[1],networkingcapital.width/3,networkingcapital.width*.6,80);
   drawText(ctx2,networkingcapital.width/3-20,100,'UFCF/FCF to Revenue Ratio (%)');
-  renderScale(ctx2,.58,5.67,.58,networkingcapital.width/3,networkingcapital.width*.6,140);
+  renderScale(ctx2,file.dtebitdar[0],file.dtebitdar[2],file.dtebitdar[1],networkingcapital.width/3,networkingcapital.width*.6,140);
   drawText(ctx2,networkingcapital.width/3-20,160,'Debt to EBITDA Ratio');
-  renderScale(ctx2,.279,1.78,.279,networkingcapital.width/3,networkingcapital.width*.6,200);
+  renderScale(ctx2,file.dter[0],file.dter[2],file.dter[1],networkingcapital.width/3,networkingcapital.width*.6,200);
   drawText(ctx2,networkingcapital.width/3-20,220,'Debt to Equity Ratio');
 
   ctx3.clearRect(0,0,growthpotential.width,growthpotential.height);
-  renderScale(ctx3,5,30,20,growthpotential.width/3,growthpotential.width*.6,20);
+  renderScale(ctx3,file.gfm[0],file.gfm[2],file.gfm[1],growthpotential.width/3,growthpotential.width*.6,20);
   drawText(ctx3,growthpotential.width/3-20,40,'Growth Forecast Mean (%)');
-  renderScale(ctx3,-3,38,29,growthpotential.width/3,growthpotential.width*.6,80);
+  renderScale(ctx3,file.lyarg[0],file.lyarg[2],file.lyarg[1],growthpotential.width/3,growthpotential.width*.6,80);
   drawText(ctx3,growthpotential.width/3-20,100,'Last 3 Year Average Revenue Growth (%)');
-  renderScale(ctx3,7,350,24,growthpotential.width/3,growthpotential.width*.6,140);
+  renderScale(ctx3,file.epsit[0],file.epsit[2],file.epsit[1],growthpotential.width/3,growthpotential.width*.6,140);
   drawText(ctx3,growthpotential.width/3-20,160,'EPS trend (2024) (%)');
-  renderScale(ctx3,0,-5,0,growthpotential.width/3,growthpotential.width*.6,200);
+  renderScale(ctx3,file.rt[0],file.rt[2],file.rt[1],growthpotential.width/3,growthpotential.width*.6,200);
   drawText(ctx3,growthpotential.width/3-20,220,'Revenue Trend (2024) (%)');
-  renderScale(ctx3,0,-5,0,growthpotential.width/3,growthpotential.width*.6,260);
+  renderScale(ctx3,file.ee[0],file.ee[2],file.ee[1],growthpotential.width/3,growthpotential.width*.6,260);
   drawText(ctx3,growthpotential.width/3-20,280,'Earnings Estimate (2024) (%)');
 
   ctx4.clearRect(0,0,risk.width,risk.height);
-  renderScale(ctx4,1.5,2.8,1.78,risk.width/3,risk.width*.6,20);
+  renderScale(ctx4,file.sd[0],file.sd[2],file.sd[1],risk.width/3,risk.width*.6,20);
   drawText(ctx4,risk.width/3-20,40,'Standard Deviation');
-  renderScale(ctx4,.7,2,1.24,risk.width/3,risk.width*.6,80);
+  renderScale(ctx4,file.beta[0],file.beta[2],file.beta[1],risk.width/3,risk.width*.6,80);
   drawText(ctx4,risk.width/3-20,100,'Beta (5Y Monthly)');
-  renderScale(ctx4,-.6,.3,.11,risk.width/3,risk.width*.6,140);
+  renderScale(ctx4,file.sr[0],file.sr[2],file.sr[1],risk.width/3,risk.width*.6,140);
   drawText(ctx4,risk.width/3-20,160,'Sharpe Ratio');
 
   ctx5.clearRect(0,0,intrinsic.width,intrinsic.height);
-  drawText(ctx5,intrinsic.width/3+55,40,'12,670');
+  drawText(ctx5,intrinsic.width/3+55,40,file.dcf);
   drawText(ctx5,intrinsic.width/3-20,40,'DCF Implied Share Price');
-  renderScale(ctx5,9,50,29.2,intrinsic.width/3,intrinsic.width*.6,80);
+  renderScale(ctx5,file.per[0],file.per[2],file.per[1],intrinsic.width/3,intrinsic.width*.6,80);
   drawText(ctx5,intrinsic.width/3-20,100,'PE Ratio');
-  renderScale(ctx5,2.11,7,6.4,intrinsic.width/3,intrinsic.width*.6,140);
+  renderScale(ctx5,file.psr[0],file.psr[2],file.psr[1],intrinsic.width/3,intrinsic.width*.6,140);
   drawText(ctx5,intrinsic.width/3-20,160,'PS Ratio');
 
   ctx6.clearRect(0,0,profitability.width,profitability.height);
-  renderScale(ctx6,10,45,44.72,profitability.width/3,networkingcapital.width*.6,20);
+  renderScale(ctx6,file.om[0],file.om[2],file.om[1],profitability.width/3,networkingcapital.width*.6,20);
   drawText(ctx6,profitability.width/3-20,40,'Operating Margin (%)');
-  renderScale(ctx6,0,20.3,20.3,profitability.width/3,profitability.width*.6,80);
+  renderScale(ctx6,file.roa[0],file.roa[2],file.roa[1],profitability.width/3,profitability.width*.6,80);
   drawText(ctx6,profitability.width/3-20,100,'ROA (%)');
-  renderScale(ctx6,0,35,26.5,profitability.width/3,profitability.width*.6,140);
+  renderScale(ctx6,file.roce[0],file.roce[2],file.roce[1],profitability.width/3,profitability.width*.6,140);
   drawText(ctx6,profitability.width/3-20,160,'Return on Caplital Employed (ROCE) (%)');
 }
-
-render2();
