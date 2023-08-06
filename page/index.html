@@ -13,13 +13,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
 </head>
   <body>
+  <div id="loading" style="opacity:1;display:block;">
+    loading...
+  </div>
+  <div id="loaded" style="opacity:0;display:none;">
     <div class="column">
       <div class="logobox">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/TSMC-Logo.svg" alt="" width="100px" height="80px">
+        <img id="9" src="" alt="" width="100px" height="80px">
         <div class="">
-          <h3>Taiwan Semiconductor Manufacturing</h3>
-          <h4>Sector: Tech/Semiconductor</h4>
-          <h4>TSM</h4>
+          <h3 id="6"></h3>
+          <h4 id="7"></h4>
+          <h4 id="8"></h4>
         </div>
       </div>
       <div class="section2">
@@ -28,11 +32,11 @@
           <canvas width="200px" height="200px" id="bars"></canvas>
           <div style="display:flex;flex-direction:column;align-items:center;">
           <ol>
-            <li>Financial Health: <span style="font-weight:normal;">8.75</span></li>
-            <li>Growth Potential: <span style="font-weight:normal;">8.5</span></li>
-            <li>Risk: <span style="font-weight:normal;" id="switchlabel">7.33</span></li>
-            <li>Intrinsic Value: <span style="font-weight:normal;">7.33</span></li>
-            <li>Profitability: <span style="font-weight:normal;">9.67</span></li>
+            <li>Financial Health: <span style="font-weight:normal;" id="1"></span></li>
+            <li>Growth Potential: <span style="font-weight:normal;" id="2"></span></li>
+            <li>Risk: <span style="font-weight:normal;" id="switchlabel"></span></li>
+            <li>Intrinsic Value: <span style="font-weight:normal;" id="4"></span></li>
+            <li>Profitability: <span style="font-weight:normal;" id="5"></span></li>
           </ol>
           <div><button id="worst" style="border-radius: 5px 0px 0px 5px;">Worst Case</button><button id="best" style="border-radius: 0px 5px 5px 0px" class="active">Best Case</button></div>
         </div>
@@ -93,6 +97,8 @@
         <li>Contact</li> -->
       </ul>
     </nav>
+    <script src="database.js"></script>
     <script src="script.js"></script>
+  </div>
   </body>
 </html>
