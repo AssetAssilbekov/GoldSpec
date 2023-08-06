@@ -52,6 +52,7 @@ h2 {
   border-radius: 4px;
   font-family: 'Quicksand', sans-serif;
   background: white;
+  font-weight: bold;
 }
 #autocomplete li:hover {
   box-shadow: inset 0em -.2em #e3c56b;
