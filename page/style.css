@@ -36,6 +36,14 @@ body {
   object-fit: contain;
   margin-left: 20px;
 }
+p {
+  margin: 0;
+  padding: 0;
+  align-self: flex-start;
+  padding-left: 10%;
+  opacity: .5;
+  font-size: 12px;
+}
 .box2 {
   background: white;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
