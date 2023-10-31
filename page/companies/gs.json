@@ -1,0 +1,36 @@
+{
+  "com":"Goldman Sachs",
+  "img":"https://upload.wikimedia.org/wikipedia/commons/6/61/Goldman_Sachs.svg",
+  "sector":"asdfghj",
+  "tic":"GS",
+  "id":"gs",
+
+  "fh":7.33,
+  "gp":7.40,
+  "risk":[7.33,7.0],
+  "iv":6.67,
+  "profitability":6.00,
+
+  "nwcm":[2,8,10],
+  "ufcffcf":["not","not","not"],
+  "dtebitdar":[0,15.40,15.4],
+  "dter":[0.59,1.296,2.698],
+
+  "gfm":[-4,10.45,21.9],
+  "lyarg":[0.5,16.00,16],
+  "epsit":[-8,38,38],
+  "rt":[0,0,3],
+  "ee":[0,0,3],
+
+  "sd":[1,1.28,1.94],
+  "beta":[1.1,1.4,1.57],
+  "sr":[-0.56,0.01,1.16],
+
+  "dcf":4.67,
+  "per":[6.71,14.29,15.36],
+  "psr":[0.4,2.59,4],
+
+  "om":[12.41,24.10,44.29],
+  "roa":[0.47,0.47,1.0],
+  "roce":[2,2.40,5.5]
+}
