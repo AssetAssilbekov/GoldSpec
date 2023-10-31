@@ -8,7 +8,7 @@ Sheet 4?
   "img":"https://upload.wikimedia.org/wikipedia/commons/2/29/TSMC-Logo.svg",
   "sector":"asdfghj",
   "tic":"asd",
-  "id":"123abc"
+  "id":"123abc",
 
   "fh":val,
   "gp":val,
@@ -184,6 +184,9 @@ function drawText(context,x,y,text) {
 }
 
 function renderScale(canvasContext,min,max,number,start,width,y) {
+  if (min==="not") {
+    return;
+  }
   canvasContext.fillStyle = '#e3c56b';
   canvasContext.beginPath();
   canvasContext.fillRect(start,10+y,width,10);
